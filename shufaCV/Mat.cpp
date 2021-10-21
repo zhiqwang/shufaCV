@@ -16,5 +16,12 @@ Mat::Mat(const std::vector<int>& dim)
         data_ = shared_data_.get();
     }
 }
+    
+Mat Mat::clone()
+{
+    Mat _copy(dim_);
+    memcpy(_copy.data_, data_, data_size_);
+    return _copy;
+}
 }
 
