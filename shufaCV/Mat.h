@@ -9,8 +9,6 @@ class Mat
 {
 protected:
     int64_t data_size_ = 0;
-    int width_ = 0, height_ = 0, channel_ = 0, number_ = 0;
-    int row_ = 0;
 
     std::vector<int> dim_;
 
@@ -23,47 +21,40 @@ protected:
 
 public:
     Mat(const std::vector<int>& dim);
-    Mat(int w, int h, int c, int n);
-    Mat(int m, int n);
-    Mat(const std::vector<int>& dim, char* data);
-    Mat();
-    //~Matrix();
+    Mat(int m, int n) : Mat(std::vector<int>{ m, n }) {}
+    Mat() {}
+    //~Mat();
     Mat clone() const;
 };
 
 //运算符重载：+-*数乘
 inline Mat operator+(const Mat& A, const Mat& B)
 {
-    Mat R(A.getDim());
-    Mat::add(A, B, R);
-    return A;
+    Mat R;
+    return R;
 }
 
 inline Mat operator-(const Mat& A, const Mat& B)
 {
-    Mat R(A.getDim(), A.getDeviceType());
-    Mat::add(A, B, R, 1, -1);
+    Mat R;
     return R;
 }
 
 inline Mat operator*(const Mat& A, const Mat& B)
 {
-    Mat R(A.getRow(), B.getNumber(), A.getDeviceType());
-    Mat::mul(A, B, R);
+    Mat R;
     return R;
 }
 
-inline Mat operator*(real r, const Mat& A)
+inline Mat operator*(double r, const Mat& A)
 {
-    Mat R(A.getDim());
-    Mat::scale(A, R, r);
+    Mat R;
     return R;
 }
 
-inline Mat operator*(const Mat& A, real r)
+inline Mat operator*(const Mat& A, double r)
 {
-    Mat R(A.getDim());
-    Mat::scale(A, R, r);
+    Mat R;
     return R;
 }
 
