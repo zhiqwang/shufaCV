@@ -13,9 +13,9 @@ protected:
     std::vector<int> dim_;
 
     //数据
-    void* data_ = nullptr;
+    char* data_ = nullptr;
     //共享指针的意义是自动析构不被引用的数据，不可以直接使用
-    std::shared_ptr<char> shared_data_;
+    std::shared_ptr<std::vector<char>> shared_data_;
 
     void* user_data_ = nullptr;
 
@@ -23,7 +23,11 @@ public:
     Mat(const std::vector<int>& dim);
     Mat(int m, int n) : Mat(std::vector<int>{ m, n }) {}
     Mat() {}
-    //~Mat();
+
+public:
+    char* data() const { return data_; }
+    int64_t row() { return col() == 0 ? 0 : data_size_ / col(); }
+    int64_t col() { return dim_.size() > 0 ? dim_.back() : 0; }
     Mat clone() const;
 };
 
