@@ -20,7 +20,8 @@ Mat::Mat(const std::vector<int>& dim)
 Mat Mat::clone()
 {
     Mat _copy(dim_);
-    memcpy(_copy.data_, data_, data_size_);
+    if(data_ && _copy.data_)
+        memcpy(_copy.data_, data_, data_size_);
     return _copy;
 }
 }
