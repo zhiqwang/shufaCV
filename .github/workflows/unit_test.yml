@@ -1,0 +1,26 @@
+# GH actions
+
+name: unittest
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  UnitTest:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+      - name: Test cmake building
+        run: |
+          cd shufaCV
+          mkdir build && cd build
+          cmake ..
+          make
