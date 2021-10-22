@@ -25,4 +25,5 @@ jobs:
           mkdir build
           cd build
           cmake -G Ninja ..
-          cmake --build build
+      - name: Building
+        run: cmake --build build
