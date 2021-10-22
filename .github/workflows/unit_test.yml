@@ -10,26 +10,19 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.config.os }}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        config:
-          - { name: "Windows MSVC", os: windows-latest, cc: "cl", cxx: "cl" }
-          - { name: "Ubuntu gcc", os: ubuntu-latest, cc: "gcc", cxx: "g++" }
-          - { name: "MacOS clang", os: macos-latest, cc: "clang", cxx: "clang++" }
+        os: [ ubuntu-latest ]
 
     steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
       - name: Setup Ninja
-        uses: ashutoshvarma/setup-ninja@master
-        with:
-          # ninja version to download. Default: 1.10.0
-          version: 1.10.0
-
+        uses: seanmiddleditch/gha-setup-ninja@v3
       - name: Build with CMake
-        uses: ashutoshvarma/action-cmake-build@master
-        with:
-          build-dir: ${{ runner.workspace }}/build
-          cc: ${{ matrix.config.cc }}
-          cxx: ${{ matrix.config.cxx }}
-          configure-options: -G Ninja
-          build-type: Release
+        run: |
+          mkdir build
+          cd build
+          cmake -G Ninja ..
+          cmake --build build
