@@ -1,0 +1,29 @@
+# GH actions
+
+name: unittest
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.image }}
+    strategy:
+      matrix:
+        image: [ 'windows-latest', 'ubuntu-latest', 'macos-latest' ]
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+      - name: Setup Ninja
+        uses: seanmiddleditch/gha-setup-ninja@v3
+      - name: Build with CMake
+        run: |
+          mkdir build
+          cd build
+          cmake -G Ninja ..
+      - name: Building
+        run: cmake --build build
