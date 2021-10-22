@@ -1,5 +1,6 @@
 
-![](https://github.com/LJoson/shufaCV/blob/main/images/shufacv.PNG)
+<div align=center><img width="150" height="150" src="https://github.com/LJoson/shufaCV/blob/main/images/shufacv.PNG"/></div>
+#![](https://github.com/LJoson/shufaCV/blob/main/images/shufacv.PNG)
 # shufaCV （书法CV）
 
 这是一个由C++书法群发起的，用于淆习和练手的cv库，小目标是超越 [halcon](https://www.mvtec.com/products/halcon) 。长期目标是拳打Torch，脚踢TF。
