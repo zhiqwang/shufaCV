@@ -1,5 +1,5 @@
 
-<div align=center><img src="https://github.com/LJoson/shufaCV/blob/main/images/shufacv.PNG"/></div>
+<div align=center><img src="https://github.com/scarsty/shufaCV/blob/main/images/shufacv.PNG"/></div>
 
 # shufaCV （书法CV）
 
