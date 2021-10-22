@@ -10,10 +10,10 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.image }}
     strategy:
       matrix:
-        os: [ ubuntu-latest ]
+        image: [ 'windows-latest', 'ubuntu-latest', 'macos-latest' ]
 
     steps:
       - name: Clone repository
