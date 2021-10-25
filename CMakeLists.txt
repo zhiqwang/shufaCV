@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.15)
 
 # Disable inplace builds to prevent source tree corruption.
 if(" ${CMAKE_SOURCE_DIR}" STREQUAL " ${CMAKE_BINARY_DIR}")
@@ -20,7 +20,7 @@ if(CMAKE_TOOLCHAIN_FILE)
   get_filename_component(CMAKE_TOOLCHAIN_FILE_NAME ${CMAKE_TOOLCHAIN_FILE} NAME)
   find_file(CMAKE_TOOLCHAIN_FILE ${CMAKE_TOOLCHAIN_FILE_NAME} PATHS ${CMAKE_SOURCE_DIR} NO_DEFAULT_PATH)
   message(STATUS "CMAKE_TOOLCHAIN_FILE = ${CMAKE_TOOLCHAIN_FILE}")
-ENDIF()
+endif()
 
 if(NOT DEFINED CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release CACHE STRING "Set build type")
@@ -28,8 +28,10 @@ endif()
 
 project(shufacv)
 
+option(SHUFACV_TEST "Build unit tests?" OFF)
+
 add_compile_options (-Wextra -Wall -Wno-unused)
-set (CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 11)
 
 aux_source_directory(${CMAKE_SOURCE_DIR}/shufaCV SHUFACV_SRCS)
 
@@ -71,3 +73,18 @@ install(
   TARGETS ${PROJECT_NAME}_static
   DESTINATION lib
 )
+
+# Unit tests
+if(SHUFACV_TEST)
+  enable_testing()
+  find_package(GTest REQUIRED)
+
+  macro(shufacv_add_test name)
+    add_executable(test_${name} tests/test_${name}.cpp)
+    target_link_libraries(test_${name} PRIVATE shufacv GTest::gtest)
+    gtest_add_tests(TARGET test_${name})
+  endmacro()
+
+  shufacv_add_test(mat)
+
+endif()
