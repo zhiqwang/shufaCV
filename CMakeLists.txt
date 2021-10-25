@@ -38,7 +38,7 @@ aux_source_directory(${CMAKE_SOURCE_DIR}/shufaCV SHUFACV_SRCS)
 # Build NN shared library
 add_library(
   ${PROJECT_NAME}
-  STATIC
+  SHARED
   ${SHUFACV_SRCS}
 )
 target_include_directories(
