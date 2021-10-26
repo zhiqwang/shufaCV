@@ -50,7 +50,7 @@ jobs:
           if [ '${{runner.os}}' == 'Windows' ]; then
             cmake -G "Visual Studio 16 2019" -A x64 .. -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DSHUFACV_TEST=ON -DGTest_DIR=${{github.workspace}}/googletest-install/lib/cmake/GTest
           else
-            cmake -G Ninja .. -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DSHUFACV_TEST=ON -DGTest_DIR=${{github.workspace}}/googletest-install/lib/cmake/GTest
+            cmake -G Ninja .. -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DSHUFACV_TEST=ON -DGTest_DIR='${{github.workspace}}'/googletest-install/lib/cmake/GTest
           fi
       - name: Building
         run: cmake --build build --config ${{env.BUILD_TYPE}}
