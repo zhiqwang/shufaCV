@@ -17,6 +17,7 @@ jobs:
     strategy:
       matrix:
         image: [ 'windows-latest', 'ubuntu-latest', 'macos-latest' ]
+      fail-fast: false
 
     steps:
       - name: Clone repository
