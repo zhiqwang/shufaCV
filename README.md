@@ -1,7 +1,10 @@
+# shufaCV （书法CV）
+
 [![LICENSE](https://img.shields.io/github/license/scarsty/shufaCV?color=brightgreen)](.LICENSE)
 [![repo-size](https://img.shields.io/github/repo-size/scarsty/shufaCV)]()
 
-# shufaCV （书法CV）
+[![Star](https://img.shields.io/github/stars/scarsty/shufaCV?style=social)]()
+[![Fork](https://img.shields.io/github/forks/scarsty/shufaCV?style=social)]()
 
 这是一个由C++书法群发起的，用于淆习和练手的cv库，小目标是超越 [halcon](https://www.mvtec.com/products/halcon) 。长期目标是拳打Torch，脚踢TF。
 
