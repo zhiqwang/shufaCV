@@ -1,4 +1,5 @@
 [![LICENSE](https://img.shields.io/github/license/scarsty/shufaCV?color=brightgreen)](.LICENSE)
+[![repo-size](https://img.shields.io/github/repo-size/scarsty/shufaCV)]()
 
 # shufaCV （书法CV）
 
