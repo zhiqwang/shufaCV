@@ -26,9 +26,9 @@ public:
 
 public:
     char* data() const { return data_; }
-    int row() { return col() == 0 ? 0 : data_size_ / col(); }
-    int col() { return dim_.size() > 0 ? dim_.back() : 0; }
-    int channel() { return 0; }    //unfinished
+    int row() const { return col() == 0 ? 0 : data_size_ / col(); }
+    int col() const { return dim_.size() > 0 ? dim_.back() : 0; }
+    int channel() const { return 0; }    //unfinished
     Mat clone() const;   //unfinished
 };
 
