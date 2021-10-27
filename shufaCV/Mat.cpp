@@ -12,6 +12,7 @@ Mat::Mat(const std::vector<int>& dim)
     }
     if (data_size_ > 0)
     {
+        shared_data_ = std::make_shared<std::vector<char>>();
         shared_data_->resize(data_size_);
         data_ = shared_data_->data();
     }
