@@ -9,3 +9,10 @@ QQ 群: 822911263
 ```
 以 BSD 3-Clause License 授权发布。若将其商业应用，我们建议您提交一张书法照到官方 QQ 群。
 ```
+## badges
+
+| item    | badge | how to setup |
+| ------- | ----- | ------------- |
+| linux-x64 | [![linux-x64](https://github.com/zchrissirhcz/HelloCpp/actions/workflows/linux-x64.yml/badge.svg?branch=main&event=push)](https://github.com/zchrissirhcz/HelloCpp/actions/workflows/linux-x64.yml) | https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge |
+| win-x64 | [![win-x64](https://github.com/zchrissirhcz/HelloCpp/actions/workflows/windows-x64.yml/badge.svg?branch=main&event=push)](https://github.com/zchrissirhcz/HelloCpp/actions/workflows/windows-x64.yml) | https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge |
+| mac-x64 | [![mac-x64](https://github.com/zchrissirhcz/HelloCpp/actions/workflows/mac-x64.yml/badge.svg?branch=main&event=push)](https://github.com/zchrissirhcz/HelloCpp/actions/workflows/mac-x64.yml) | https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge |
