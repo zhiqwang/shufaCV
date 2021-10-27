@@ -26,6 +26,6 @@ int main(int argc, char* argv[])
 
     // Exclude a specific test
     //testing::GTEST_FLAG(filter) = "-cvtColorTwoPlane.yuv420sp_to_rgb:-cvtColorTwoPlane.rgb_to_yuv420sp"; // The writing test is broken, so skip it
-
+    
     return RUN_ALL_TESTS();
 }
