@@ -15,6 +15,24 @@ if(NOT DEFINED CMAKE_INSTALL_PREFIX)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/install" CACHE PATH "Installation Directory")
 endif()
 
+
+if(NOT DEFINED SHUFACV_VERSION)
+    string(TIMESTAMP SHUFACV_VERSION "%Y%m%d")
+endif()
+
+set(SHUFACV_VERSION_MAJOR 0)
+set(SHUFACV_VERSION_MINOR 0)
+#set(SHUFACV_VERSION_PATCH ${SHUFACV_VERSION})
+set(SHUFACV_VERSION_PATCH 0)
+set(SHUFACV_VERSION_STRING ${SHUFACV_VERSION_MAJOR}.${SHUFACV_VERSION_MINOR}.${SHUFACV_VERSION_PATCH})
+if(APPLE OR IOS)
+    # macos / ios only accepts a.b.c.d.e where a=24bit b/c/d/e=10bit
+    # 20201228 to 20.12.28
+    set(SHUFACV_VERSION_STRING ${SHUFACV_VERSION_MAJOR}.${SHUFACV_VERSION_MINOR}.${SHUFACV_VERSION_YEAR}.0.0)
+endif()
+message(STATUS "SHUFACV_VERSION_STRING = ${SHUFACV_VERSION_STRING}")
+configure_file(version.h.in ${CMAKE_CURRENT_BINARY_DIR}/version.h)
+
 if(CMAKE_TOOLCHAIN_FILE)
   # get absolute path, but get_filename_component ABSOLUTE only refer with source dir, so find_file here :(
   get_filename_component(CMAKE_TOOLCHAIN_FILE_NAME ${CMAKE_TOOLCHAIN_FILE} NAME)
@@ -45,7 +63,7 @@ add_library(
 )
 target_include_directories(
   ${PROJECT_NAME}
-  PUBLIC ${CMAKE_SOURCE_DIR}/shufaCV
+  PUBLIC ${CMAKE_SOURCE_DIR}/shufaCV ${CMAKE_CURRENT_BINARY_DIR}
 )
 # Build NN static library
 add_library(
@@ -55,7 +73,7 @@ add_library(
 )
 target_include_directories(
   ${PROJECT_NAME}_static
-  PUBLIC ${CMAKE_SOURCE_DIR}/shufaCV
+  PUBLIC ${CMAKE_SOURCE_DIR}/shufaCV ${CMAKE_CURRENT_BINARY_DIR}
 )
 
 # Report summary
@@ -84,9 +102,11 @@ if(SHUFACV_TEST)
   macro(shufacv_add_test name)
     add_executable(test_${name} tests/test_${name}.cpp)
     target_link_libraries(test_${name} PRIVATE shufacv GTest::gtest)
+    target_include_directories(test_${name} PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
     gtest_add_tests(TARGET test_${name})
   endmacro()
 
   shufacv_add_test(mat)
-
+  shufacv_add_test(version)
 endif()
+
