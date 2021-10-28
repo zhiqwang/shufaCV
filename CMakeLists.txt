@@ -28,10 +28,7 @@ set(SHUFACV_VERSION_STRING ${SHUFACV_VERSION_MAJOR}.${SHUFACV_VERSION_MINOR}.${S
 if(APPLE OR IOS)
     # macos / ios only accepts a.b.c.d.e where a=24bit b/c/d/e=10bit
     # 20201228 to 20.12.28
-    string(SUBSTRING ${SHUFACV_VERSION} 2 2 SHUFACV_VERSION_YEAR)
-    string(SUBSTRING ${SHUFACV_VERSION} 4 2 SHUFACV_VERSION_MONTH)
-    string(SUBSTRING ${SHUFACV_VERSION} 6 2 SHUFACV_VERSION_DAY)
-    set(SHUFACV_VERSION_STRING ${SHUFACV_VERSION_MAJOR}.${SHUFACV_VERSION_MINOR}.${SHUFACV_VERSION_YEAR}.${SHUFACV_VERSION_MONTH}.${SHUFACV_VERSION_DAY})
+    set(SHUFACV_VERSION_STRING ${SHUFACV_VERSION_MAJOR}.${SHUFACV_VERSION_MINOR}.${SHUFACV_VERSION_YEAR}.0.0)
 endif()
 message(STATUS "SHUFACV_VERSION_STRING = ${SHUFACV_VERSION_STRING}")
 configure_file(version.h.in ${CMAKE_CURRENT_BINARY_DIR}/version.h)
@@ -66,7 +63,7 @@ add_library(
 )
 target_include_directories(
   ${PROJECT_NAME}
-  PUBLIC ${CMAKE_SOURCE_DIR}/shufaCV
+  PUBLIC ${CMAKE_SOURCE_DIR}/shufaCV ${CMAKE_CURRENT_BINARY_DIR}
 )
 # Build NN static library
 add_library(
@@ -76,7 +73,7 @@ add_library(
 )
 target_include_directories(
   ${PROJECT_NAME}_static
-  PUBLIC ${CMAKE_SOURCE_DIR}/shufaCV
+  PUBLIC ${CMAKE_SOURCE_DIR}/shufaCV ${CMAKE_CURRENT_BINARY_DIR}
 )
 
 # Report summary
@@ -105,10 +102,11 @@ if(SHUFACV_TEST)
   macro(shufacv_add_test name)
     add_executable(test_${name} tests/test_${name}.cpp)
     target_link_libraries(test_${name} PRIVATE shufacv GTest::gtest)
+    target_include_directories(test_${name} PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
     gtest_add_tests(TARGET test_${name})
   endmacro()
 
   shufacv_add_test(mat)
-
+  shufacv_add_test(version)
 endif()
 
