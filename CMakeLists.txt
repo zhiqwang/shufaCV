@@ -98,6 +98,7 @@ install(
 if(SHUFACV_TEST)
   enable_testing()
   find_package(GTest REQUIRED)
+  include(GoogleTest)
 
   macro(shufacv_add_test name)
     add_executable(test_${name} tests/test_${name}.cpp)
