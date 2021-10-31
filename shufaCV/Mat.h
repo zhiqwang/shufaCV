@@ -23,7 +23,7 @@ protected:
 
 public:
     Mat(const std::vector<int>& dim);
-    Mat(std::initializer_list<int> dim);
+    Mat(const std::initializer_list<int> dim);
     Mat(int m, int n) : Mat(std::vector<int>{ m, n }) {}
     Mat() {}
 
