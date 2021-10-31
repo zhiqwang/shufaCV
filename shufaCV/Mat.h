@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <vector>
+#include <assert.h>
 
 namespace sfcv
 {
@@ -36,9 +37,19 @@ public:
 };
 
 //运算符重载：+-*数乘
-inline Mat operator+(const Mat& A, const Mat& B)
+inline const Mat operator+(const Mat& A, const Mat& B)
 {
-    Mat R;
+    assert( (A.row() == B.row()) && (A.col() == B.col()) );
+    Mat R(A.row(), A.col());
+    char* da = A.data();
+    char* db = B.data();
+    char* dr = R.data();
+    for (int i=0; i<A.row(); i++) {
+        for (int j=0; j<A.col(); j++) {
+            int idx = i*A.col() + j;
+            dr[idx] = da[idx] + db[idx];
+        }
+    }
     return R;
 }
 
