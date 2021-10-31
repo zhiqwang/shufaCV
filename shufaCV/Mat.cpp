@@ -2,11 +2,21 @@
 
 namespace sfcv
 {
-Mat::Mat(const std::vector<int>& dim)
+Mat::Mat(const std::vector<int>& dim):
+    data_size_(1), dim_(dim)
 {
-    dim_ = dim;
-    data_size_ = 1;
-    for (auto d : dim_)
+    create();
+}
+
+Mat::Mat(const std::initializer_list<int> dim):
+    data_size_(1), dim_(dim)
+{
+    create();
+}
+
+void Mat::create()
+{
+    for(const auto d : dim_)
     {
         data_size_ *= d;
     }
@@ -17,5 +27,6 @@ Mat::Mat(const std::vector<int>& dim)
         data_ = shared_data_->data();
     }
 }
+
 }
 

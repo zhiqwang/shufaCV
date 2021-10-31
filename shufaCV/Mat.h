@@ -19,8 +19,11 @@ protected:
 
     void* user_data_ = nullptr;
 
+    void create(); // ctors reuse this
+
 public:
     Mat(const std::vector<int>& dim);
+    Mat(const std::initializer_list<int> dim);
     Mat(int m, int n) : Mat(std::vector<int>{ m, n }) {}
     Mat() {}
 
