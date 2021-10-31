@@ -8,7 +8,7 @@ Mat::Mat(const std::vector<int>& dim):
     create();
 }
 
-Mat::Mat(std::initializer_list<int> dim):
+Mat::Mat(const std::initializer_list<int> dim):
     data_size_(1), dim_(dim)
 {
     create();
@@ -16,7 +16,7 @@ Mat::Mat(std::initializer_list<int> dim):
 
 void Mat::create()
 {
-    for(auto d : dim_)
+    for(const auto d : dim_)
     {
         data_size_ *= d;
     }
