@@ -13,9 +13,9 @@ protected:
 
     std::vector<int> dim_;
 
-    //数据
+    /* 数据 */
     char* data_ = nullptr;
-    //共享指针的意义是自动析构不被引用的数据，不可以直接使用
+    /* 共享指针的意义是自动析构不被引用的数据，不可以直接使用 */
     std::shared_ptr<std::vector<char>> shared_data_;
 
     void* user_data_ = nullptr;
