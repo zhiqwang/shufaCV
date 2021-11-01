@@ -1,6 +1,6 @@
 # GH actions
 
-name: unittest
+name: test-coverage
 
 on:
   push:
@@ -50,7 +50,7 @@ jobs:
       - name: lcov-collect
         run: |
           cd build
-          lcov -d ./src -c -o lcov.info
+          lcov -d . -c -o lcov.info
           lcov -r lcov.info '/usr/*' -o lcov.info
           lcov -r lcov.info '*/build/*' -o lcov.info
           lcov --list lcov.info
