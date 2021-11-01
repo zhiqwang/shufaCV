@@ -74,14 +74,15 @@ TEST(Mat, global_add_operator)
 
     char* data1 = mat1.data();
     char* data2 = mat2.data();
-    for (int i=0; i<rows*cols; i++)
+    for (int i = 0; i < rows * cols; i++)
     {
         data1[i] = 1;
         data2[i] = 2;
     }
     sfcv::Mat mat3 = mat1 + mat2;
     char* data3 = mat3.data();
-    for (int i=0; i<rows*cols; i++) {
+    for (int i = 0; i < rows * cols; i++)
+    {
         EXPECT_EQ(data3[i], 3);
     }
 }
