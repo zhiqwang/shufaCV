@@ -109,4 +109,3 @@ if(SHUFACV_TEST)
   shufacv_add_test(mat)
   shufacv_add_test(version)
 endif()
-

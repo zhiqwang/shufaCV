@@ -11,6 +11,11 @@
 *.gch
 *.pch
 
+# Compiled python
+__pycache__
+*.pyc
+*.pyd
+
 # Compiled Dynamic libraries
 *.so
 *.dylib
