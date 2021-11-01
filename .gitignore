@@ -38,3 +38,6 @@ __pycache__
 
 # Build dir
 build/
+
+# VSCode
+.vscode/
