@@ -47,6 +47,7 @@ endif()
 project(shufacv)
 
 option(SHUFACV_TEST "Build unit tests?" OFF)
+option(SHUFACV_COVERAGE "Build for coverage?" OFF)
 
 if( (CMAKE_CXX_COMPILER_ID MATCHES "GNU") OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
   add_compile_options(-Wextra -Wall -Wno-unused)
@@ -75,6 +76,11 @@ target_include_directories(
   ${PROJECT_NAME}_static
   PUBLIC ${CMAKE_SOURCE_DIR}/shufaCV ${CMAKE_CURRENT_BINARY_DIR}
 )
+
+if(SHUFACV_COVERAGE)
+  target_compile_options(shufacv_static PUBLIC -coverage -fprofile-arcs -ftest-coverage)
+  target_link_libraries(shufacv_static PUBLIC -coverage -lgcov)
+endif()
 
 # Report summary
 include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/summary.cmake")
