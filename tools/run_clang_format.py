@@ -129,7 +129,7 @@ def run_clang_format_diff(args, file):
         raise DiffError(str(exc))
 
     if args.fix:
-        invocation = [args.clang_format_executable, "-i", file]
+        invocation = [args.clang_format_executable, "--fix", file]
     else:
         invocation = [args.clang_format_executable, file]
 
