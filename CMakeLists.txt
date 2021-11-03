@@ -56,7 +56,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 aux_source_directory(${CMAKE_SOURCE_DIR}/shufaCV SHUFACV_SRCS)
 
-# Build NN shared library
+# Build sfcv shared library
 add_library(
   ${PROJECT_NAME}
   SHARED
@@ -66,7 +66,7 @@ target_include_directories(
   ${PROJECT_NAME}
   PUBLIC ${CMAKE_SOURCE_DIR}/shufaCV ${CMAKE_CURRENT_BINARY_DIR}
 )
-# Build NN static library
+# Build sfcv static library
 add_library(
   ${PROJECT_NAME}_static
   STATIC
@@ -90,6 +90,11 @@ set_target_properties(
   ${PROJECT_NAME}_static
   PROPERTIES
   OUTPUT_NAME ${PROJECT_NAME}
+)
+set_target_properties(
+  ${PROJECT_NAME}
+  PROPERTIES
+  SOVERSION ${SHUFACV_VERSION_STRING}
 )
 install(
   TARGETS ${PROJECT_NAME}
