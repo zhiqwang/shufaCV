@@ -25,10 +25,18 @@ jobs:
 
       - name: Setup Ninja
         uses: seanmiddleditch/gha-setup-ninja@v3
-
+      
+      - name: cache-googletest
+        id: cache-googletest
+        uses: actions/cache@v2.1.6
+        with:
+          path: googletest-install
+          key: cache-googletest
+        
       - name: Install googletest
         shell: bash
         run: |
+          if: steps.cache-googletest.outputs.cache-hit != 'true'
           git clone https://github.com/google/googletest --depth 1
           cd googletest
           mkdir build && cd build
