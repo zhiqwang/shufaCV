@@ -23,15 +23,15 @@ sty  https://github.com/scarsty/shufaCV (push)
 ```
 origin 指向你 fork 的仓库地址；remote 即官方 repo。可以基于不同的 remote 创建和提交分支。
 
-例如切换到官方 master 分支，并基于此创建自己的分支（命名尽量言简意赅。一个分支只做一件事，方便 review 和 revert）
+例如切换到官方 main 分支，并基于此创建自己的分支（命名尽量言简意赅。一个分支只做一件事，方便 review 和 revert）
 ```
-$ git checkout zz/master
+$ git checkout zz/main
 $ git checkout -b fix-readme
 ```
 
-或创建分支时指定基于官方 master 分支：
+或创建分支时指定基于官方 main 分支：
 ```
-$ git checkout -b fix-readme sty/master
+$ git checkout -b fix-readme sty/main
 ```
 
 > `git fetch` 是从远程获取最新代码到本地。如果是第二次 pr shufaCV，直接从  `git fetch sty` 开始即可，不需要 `git remote add sty`，也不需要修改 `github.com/zz/shufaCV`。
@@ -45,6 +45,7 @@ $ git checkout -b fix-readme sty/master
 * 为了保证平台兼容性，尽量增加CI测试
 * 若是新增功能或平台，`test`目录需有对应测试用例
 * 文档放到`doc`对应目录下，中文用`.zh.md`做后缀；英文直接用`.md`后缀
+* 建议 python tools/run_clang_format.py --files shufaCV tests --recursive --clang_format_executable clang-format --style file --fix
 
 开发完成后提交到自己的 repository
 ```
@@ -62,7 +63,7 @@ $ git push origin fix-readme
     * 功能或性能测试
     * 测试结果
 
-CI 已集成了自动格式化，restyled-io 会在 pr 的同时生成 `Restyled add conv int8`，需要 merge 自动 restyled 的分支，例如
+CI 已集成了自动格式化，需要 merge 自动 restyled 的分支，例如
 ```
 $ git fetch sty
 $ git checkout fix-readme
