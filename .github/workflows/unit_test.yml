@@ -34,6 +34,7 @@ jobs:
           key: cache-googletest
         
       - name: Install googletest
+        shell: bash
         if: steps.cache-googletest.outputs.cache-hit != 'true'
         run: |          
           git clone https://github.com/google/googletest --depth 1
