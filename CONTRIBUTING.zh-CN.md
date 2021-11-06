@@ -25,7 +25,7 @@ origin 指向你 fork 的仓库地址；remote 即官方 repo。可以基于不�
 
 例如切换到官方 main 分支，并基于此创建自己的分支（命名尽量言简意赅。一个分支只做一件事，方便 review 和 revert）
 ```
-$ git checkout zchrissirhcz/main
+$ git rebase upstream/main
 $ git checkout -b fix-readme
 ```
 
