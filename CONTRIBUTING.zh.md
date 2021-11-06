@@ -3,38 +3,38 @@
 #### 一、fork 分支
 在浏览器中打开 [shufaCV](https://github.com/scarsty/shufaCV/), `fork` 到自己的 repositories，例如
 ```
-https://github.com/zz/shufaCV
+https://github.com/zchrissirhcz/shufaCV
 ```
 
 clone 项目到本地，添加官方 remote 并 fetch:
 ```
-$ git clone https://github.com/zz/shufaCV && cd shufaCV
-$ git remote add sty https://github.com/scarsty/shufaCV
-$ git fetch sty
+$ git clone https://github.com/zchrissirhcz/shufaCV && cd shufaCV
+$ git remote add upstream https://github.com/scarsty/shufaCV
+$ git fetch upstream
 ```
-对于 `git clone` 下来的项目，它现在有两个 remote，分别是 origin 和 sty：
+对于 `git clone` 下来的项目，它现在有两个 remote，分别是 origin 和 upstream：
 
 ```
 $ git remote -v
-origin   https://github.com/zz/shufaCV (fetch)
-origin   https://github.com/zz/shufaCV (push)
-sty  https://github.com/scarsty/shufaCV (fetch)
-sty  https://github.com/scarsty/shufaCV (push)
+origin   https://github.com/zchrissirhcz/shufaCV (fetch)
+origin   https://github.com/zchrissirhcz/shufaCV (push)
+upstream  https://github.com/scarsty/shufaCV (fetch)
+upstream  https://github.com/scarsty/shufaCV (push)
 ```
 origin 指向你 fork 的仓库地址；remote 即官方 repo。可以基于不同的 remote 创建和提交分支。
 
 例如切换到官方 main 分支，并基于此创建自己的分支（命名尽量言简意赅。一个分支只做一件事，方便 review 和 revert）
 ```
-$ git checkout zz/main
+$ git checkout zchrissirhcz/main
 $ git checkout -b fix-readme
 ```
 
 或创建分支时指定基于官方 main 分支：
 ```
-$ git checkout -b fix-readme sty/main
+$ git checkout -b fix-readme upstream/main
 ```
 
-> `git fetch` 是从远程获取最新代码到本地。如果是第二次 pr shufaCV，直接从  `git fetch sty` 开始即可，不需要 `git remote add sty`，也不需要修改 `github.com/zz/shufaCV`。
+> `git fetch` 是从远程获取最新代码到本地。如果是第二次 pr shufaCV，直接从  `git fetch upstream` 开始即可，不需要 `git remote add upstream`，也不需要修改 `github.com/zchrissirhcz/shufaCV`。
 
 #### 二、代码习惯
 为了增加沟通效率，reviewer 一般要求 contributor 遵从以下规则
@@ -65,9 +65,9 @@ $ git push origin fix-readme
 
 CI 已集成了自动格式化，需要 merge 自动 restyled 的分支，例如
 ```
-$ git fetch sty
+$ git fetch upstream
 $ git checkout fix-readme
-$ git merge sty/restyled/pull-22
+$ git merge upstream/restyled/pull-22
 $ git push origin fix-readme
 ```
 回到浏览器签署  CLA，所有 CI 测试通过后通知 reviewer merge 此分支。
