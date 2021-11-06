@@ -7,11 +7,13 @@ https://github.com/zchrissirhcz/shufaCV
 ```
 
 clone 项目到本地，添加官方 remote 并 fetch:
+
+```bash
+git clone https://github.com/zchrissirhcz/shufaCV && cd shufaCV
+git remote add upstream https://github.com/scarsty/shufaCV
+git fetch upstream
 ```
-$ git clone https://github.com/zchrissirhcz/shufaCV && cd shufaCV
-$ git remote add upstream https://github.com/scarsty/shufaCV
-$ git fetch upstream
-```
+
 对于 `git clone` 下来的项目，它现在有两个 remote，分别是 origin 和 upstream：
 
 ```
