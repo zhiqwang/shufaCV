@@ -59,7 +59,7 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake ${{ matrix.build }} .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DSHUFACV_TEST=ON -DGTest_DIR=${{ github.workspace }}/googletest-install-${{ matrix.image }}/lib/cmake/GTest
+          cmake ${{ matrix.build }} .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DSHUFACV_TEST=ON -DGTest_DIR='${{ github.workspace }}'/googletest-install-${{ matrix.image }}/lib/cmake/GTest
       - name: Building
         run: cmake --build build --config ${{ env.BUILD_TYPE }}
       - name: Testing
