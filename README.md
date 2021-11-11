@@ -1,9 +1,7 @@
-
-
 # shufaCV （书法CV）
 
 [![License](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)](.LICENSE)
-[![unittest](https://github.com/scarsty/shufaCV/actions/workflows/unit_test.yml/badge.svg)](https://github.com/scarsty/shufaCV/actions/workflows/unit_test.yml)
+[![unittest](https://github.com/scarsty/shufaCV/actions/workflows/unit-test.yml/badge.svg)](https://github.com/scarsty/shufaCV/actions/workflows/unit-test.yml)
 [![codecov](https://codecov.io/gh/scarsty/shufacv/branch/main/graph/badge.svg)](https://codecov.io/gh/scarsty/shufacv)
 ![Widows](https://img.shields.io/badge/Windows-gray?logo=windows&logoColor=blue)
 ![Ubuntu](https://img.shields.io/badge/Ubuntu-gray?logo=ubuntu)
@@ -16,6 +14,6 @@ QQ 群: 822911263
 
 ## 授权
 
-```
+```bash
 以 BSD 3-Clause License 授权发布。若将其商业应用，我们建议您提交一张书法照到官方 QQ 群。
 ```
