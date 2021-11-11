@@ -17,6 +17,16 @@ jobs:
     strategy:
       matrix:
         image: [ 'windows-latest', 'ubuntu-latest', 'macos-latest' ]
+        include:
+        - image: windows-latest
+          cmake: -Dgtest_force_shared_crt=ON -G "Visual Studio 16 2019" -A x64
+          build: -G "Visual Studio 16 2019" -A x64
+        - image: ubuntu-latest
+          cmake: -G Ninja
+          build: -G Ninja
+        - image: macos-latest
+          cmake: -G Ninja
+          build: -G Ninja
       fail-fast: false
 
     steps:
@@ -36,34 +46,22 @@ jobs:
       - name: Install googletest
         shell: bash
         if: steps.cache-googletest.outputs.cache-hit != 'true'
-        run: |          
+        run: |
           git clone https://github.com/google/googletest --depth 1
           cd googletest
           mkdir build && cd build
-          if [ '${{runner.os}}' == 'Windows' ]; then
-            echo "Yes, this is on Windows"
-            cmake .. -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_INSTALL_PREFIX='${{github.workspace}}'/googletest-install-${{ matrix.image }} -Dgtest_force_shared_crt=ON -G "Visual Studio 16 2019" -A x64
-          else
-            echo "Ohh, this is not on Windows"
-            cmake .. -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_INSTALL_PREFIX='${{github.workspace}}'/googletest-install-${{ matrix.image }} -G Ninja
-          fi
-          cmake --build . --config ${{env.BUILD_TYPE}} -j 2
-          cmake --install . --config ${{env.BUILD_TYPE}}
+          cmake .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_INSTALL_PREFIX='${{ github.workspace }}'/googletest-install-${{ matrix.image }} ${{ matrix.cmake }}
+          cmake --build . --config ${{ env.BUILD_TYPE }} -j 2
+          cmake --install . --config ${{ env.BUILD_TYPE }}
 
       - name: Configure with CMake
         shell: bash
         run: |
           mkdir build
           cd build
-          if [ '${{runner.os}}' == 'Windows' ]; then
-            echo "Yes, this is on Windows"
-            cmake -G "Visual Studio 16 2019" -A x64 .. -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DSHUFACV_TEST=ON -DGTest_DIR='${{github.workspace}}'/googletest-install-${{ matrix.image }}/lib/cmake/GTest
-          else
-            echo "Ohh, this is not on Windows"
-            cmake -G Ninja .. -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DSHUFACV_TEST=ON -DGTest_DIR=${{github.workspace}}/googletest-install-${{ matrix.image }}/lib/cmake/GTest
-          fi
+          cmake ${{ matrix.build }} .. -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DSHUFACV_TEST=ON -DGTest_DIR=${{ github.workspace }}/googletest-install-${{ matrix.image }}/lib/cmake/GTest
       - name: Building
-        run: cmake --build build --config ${{env.BUILD_TYPE}}
+        run: cmake --build build --config ${{ env.BUILD_TYPE }}
       - name: Testing
-        working-directory: ${{github.workspace}}/build
-        run: ctest -C ${{env.BUILD_TYPE}} --output-on-failure
+        working-directory: ${{ github.workspace }}/build
+        run: ctest -C ${{ env.BUILD_TYPE }} --output-on-failure
