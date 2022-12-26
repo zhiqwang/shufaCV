@@ -38,7 +38,7 @@ jobs:
       
       - name: cache-googletest
         id: cache-googletest
-        uses: actions/cache@v2.1.7
+        uses: actions/cache@v3.2.1
         with:
           path: googletest-install-${{ matrix.image }}
           key: cache-googletest-${{ matrix.image }}
