@@ -55,7 +55,7 @@ jobs:
           lcov -r lcov.info '*/build/*' -o lcov.info
           lcov --list lcov.info
       - name: codecov
-        uses: codecov/codecov-action@v2.1.0
+        uses: codecov/codecov-action@v3.1.4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: build/lcov.info
